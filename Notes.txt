@@ -1,0 +1,14 @@
+rm zokrates/square.code
+
+printf "def main(private field a, field b) -> (field): \n field result = if a * a == b then 1 else 0 fi \n return result\n" > square.code
+
+./zokrates compile -i square.code
+
+
+
+
+npm run dev
+truffle migrate --network rinkeby --reset --compile-all
+
+ganache-cli -m "boat scorpion nice fun trade sight gallery congress link stay under domain" -d 1000 -a 2
+
