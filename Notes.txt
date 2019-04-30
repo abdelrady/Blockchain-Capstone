@@ -1,3 +1,7 @@
+docker run -v /C/Users/rady/Desktop/Blockchain/Udacity/Capstone/Blockchain-Capstone:/home/zokrates/code -ti zokrates/zokrates /bin/bash
+
+
+
 rm zokrates/square.code
 
 printf "def main(private field a, field b) -> (field): \n field result = if a * a == b then 1 else 0 fi \n return result\n" > square.code
