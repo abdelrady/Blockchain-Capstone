@@ -11,7 +11,7 @@ contract Ownable {
     //  1) create a private '_owner' variable of type address with a public getter function
     address _owner;
 
-    function getOwner() public returns(address) {
+    function owner() public view returns(address) {
         return _owner;
     }
 
@@ -256,7 +256,7 @@ contract ERC721 is Pausable, ERC165 {
 
         // TODO revert if given tokenId already exists or given address is invalid
         require(to != address(0), "Invalid address in to parameter.");
-        require(_exists(tokenId), "Token is already minted.");
+        require(!_exists(tokenId), "Token is already minted.");
   
         // TODO mint tokenId to given address & increase token count of owner
         _tokenOwner[tokenId] = to;
@@ -518,15 +518,15 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
     }
 
     // TODO: create external getter functions for name, symbol, and baseTokenURI
-    function getTokenName() public returns(string memory name){
+    function name() public returns(string memory name){
         return _name;
     }
 
-    function getTokenSymbol() public returns(string memory symbol){
+    function symbol() public returns(string memory symbol){
         return _symbol;
     }
 
-    function getTokenURI() public returns(string memory uri){
+    function baseTokenURI() public returns(string memory uri){
         return _baseTokenURI;
     }
 
@@ -559,12 +559,12 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
 //      -returns a true boolean upon completion of the function
 //      -calls the superclass mint and setTokenURI functions
 
-contract ERC721Mintable is ERC721Metadata
+contract ERC721Mintable is ERC721Metadata('Sa7toot', 'S7T', 'https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/')
 {
-    constructor() ERC721Metadata('Sa7toot', 'S7T', 'https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/') internal {
-        
-    }
+    constructor() public {
 
+    }
+    
     function mint(address to, uint256 tokenId)//, string tokenURI 
     public
     onlyOwner
@@ -572,6 +572,7 @@ contract ERC721Mintable is ERC721Metadata
     {
         super._mint(to, tokenId);
         super.setTokenURI(tokenId);
+        return true;
     }
 }
 

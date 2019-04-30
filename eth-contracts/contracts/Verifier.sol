@@ -591,6 +591,7 @@ contract Verifier {
         for(uint i = 0; i < input.length; i++){
             inputValues[i] = input[i];
         }
+
         if (verify(inputValues, proof) == 0) {
             emit Verified("Transaction successfully verified.");
             return true;

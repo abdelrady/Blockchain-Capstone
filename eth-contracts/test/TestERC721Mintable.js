@@ -1,4 +1,4 @@
-var ERC721MintableComplete = artifacts.require('ERC721MintableComplete');
+var ERC721MintableComplete = artifacts.require('ERC721Mintable');
 
 contract('TestERC721Mintable', accounts => {
 
@@ -10,26 +10,27 @@ contract('TestERC721Mintable', accounts => {
             this.contract = await ERC721MintableComplete.new({from: account_one});
 
             // TODO: mint multiple tokens
-            this.contract.mint(account_one, 1, {from: account_one});
-            this.contract.mint(account_one, 2, {from: account_one});
-            this.contract.mint(account_one, 3, {from: account_one});
-            this.contract.mint(account_two, 4, {from: account_one});
+            await this.contract.mint(account_one, 1, {from: account_one});
+            await this.contract.mint(account_one, 2, {from: account_one});
+            await this.contract.mint(account_one, 3, {from: account_one});
+            await this.contract.mint(account_two, 4, {from: account_one});
         })
 
         it('should return total supply', async function () { 
-            let totalSupply = await this.contract.totalSupply().call();
+            let totalSupply = await this.contract.totalSupply.call();
             assert.equal(totalSupply, 4, "Invalid total supply");
         })
 
         it('should get token balance', async function () { 
-            
+            let balance = await this.contract.balanceOf.call(account_one, {from: account_one});
+            assert.equal(balance, "3", "account #1 balance should be 3");
         })
 
         // token uri should be complete i.e: https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/1
         it('should return token uri', async function () { 
             let tokenId = 4;
             let expectedURI = "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/" + tokenId;
-            let tokenURI = await this.contract.tokenURI().call(tokenId);
+            let tokenURI = await this.contract.tokenURI.call(tokenId);
             assert.equal(tokenURI, expectedURI, "Invalid token URI returned.");
         })
 
@@ -60,9 +61,9 @@ contract('TestERC721Mintable', accounts => {
         })
 
         it('should return contract owner', async function () { 
-            let owner = await this.contract.getOwner().call();
+            let owner = await this.contract.getOwner.call();
             assert(account_one, owner, "Invalid owner returned.");
         })
 
     });
-})
+});
