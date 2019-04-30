@@ -15,6 +15,7 @@ Open Sea remaining assets: https://rinkeby.opensea.io/accounts/0x6cb9ee08e2fd040
 
 
 Open Sea assets sold:
+
 https://rinkeby.opensea.io/assets/0x01162189997964b5f107ed7b476e1d335438b9b2/1
 https://rinkeby.opensea.io/assets/0x01162189997964b5f107ed7b476e1d335438b9b2/2
 https://rinkeby.opensea.io/assets/0x01162189997964b5f107ed7b476e1d335438b9b2/3
